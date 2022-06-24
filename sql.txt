@@ -1,0 +1,33 @@
+
+CREATE DATABASE participantes;
+CREATE USER participantes WITH PASSWORD 'participantes123';
+GRANT ALL PRIVILEGES ON DATABASE participantes TO admin;
+
+
+CREATE TABLE Participantes (
+    autoID VARCHAR PRIMARY KEY UNIQUE,
+    id_projeto_fk VARCHAR,
+    data_entrada DATE,
+    Nome VARCHAR
+);
+ 
+CREATE TABLE Projeto (
+    id VARCHAR PRIMARY KEY,
+    Custo FLOAT,
+    info_id_fk VARCHAR
+);
+ 
+
+CREATE TABLE info_Projeto (
+    id VARCHAR PRIMARY KEY,
+    data_inicio DATE,
+    nome VARCHAR
+);
+
+ALTER TABLE Participantes ADD CONSTRAINT FK_Participantes_3
+    FOREIGN KEY (id_projeto_fk)
+    REFERENCES Projeto (id);
+
+ALTER TABLE Projeto ADD CONSTRAINT FK_Projeto_2
+    FOREIGN KEY (info_id_fk)
+    REFERENCES info_Projeto(id);
