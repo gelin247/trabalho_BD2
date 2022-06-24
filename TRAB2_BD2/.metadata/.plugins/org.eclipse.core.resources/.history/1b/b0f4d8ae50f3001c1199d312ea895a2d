@@ -1,0 +1,16 @@
+package main;
+
+import dao.ControllerProjetos;
+import dao.ControllerInfoProjeto;
+import dao.ControllerParticipantes;
+
+public class StartApp {
+
+	public static void main(String[] args) {
+		
+		ControllerProjetos projetos = new ControllerProjetos();
+		
+		
+
+	}
+}

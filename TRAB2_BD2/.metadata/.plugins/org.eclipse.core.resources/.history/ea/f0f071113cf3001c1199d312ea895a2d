@@ -1,0 +1,53 @@
+package entities;
+
+import java.sql.Date;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="participantes")
+public class Participantes {
+
+	@Id
+	@Column(name="autoID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private String autoID;
+		
+	
+	@Column(name="data_entrada")
+	private Date data_entrada;
+	
+	@Column(name="Nome")
+	private String nome;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@Column(name="id_projeto_fk")
+	@JoinColumn(name="id_projeto_fk")
+	private Projeto projeto_fk2;
+	
+	
+	@OneToOne(mappedBy = "conta_fk1")
+	private Detalhes detalhes;
+	
+	@OneToMany(mappedBy = "conta_fk2", fetch = FetchType.LAZY)
+	private Set<Movimentos> movimentos;
+	
+	 public Participantes() {
+		// TODO Auto-generated constructor stub
+	
+		
+	}}
+
+	
+	

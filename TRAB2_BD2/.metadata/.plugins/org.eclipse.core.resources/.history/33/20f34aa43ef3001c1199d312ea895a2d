@@ -1,0 +1,79 @@
+package dao;
+
+import java.util.Scanner;
+
+import javax.persistence.EntityManager;
+
+import entities.Detalhes;
+import utils.HibernateUtil;
+
+public class ControllerDetalhes {
+	
+	EntityManager em = HibernateUtil.getEntityManager();
+	Scanner scan = new Scanner(System.in);
+	Detalhes detalhes =  new Detalhes();
+	
+	public void createDetalhes() {
+		System.out.print("Digite o nome do usuário: ");
+			detalhes.setNomeUsuario(scan.nextLine());
+		System.out.print("Digite o CPF do usuário: ");
+			detalhes.setCpfUsuario(scan.nextLine());
+		System.out.println("Digite o telefone do usuário: ");
+			detalhes.setTelefone(scan.nextLine());
+			
+			em.getTransaction().begin();
+			em.persist(detalhes);
+			em.getTransaction().commit();
+			
+		System.out.println("Detalhes da conta criado com sucesso!!!");
+	}	
+	
+	public void deleteDetalhes() {
+		System.out.print("Digite o ID dos detalhes da conta a ser excluida: ");
+			int id = scan.nextInt(); scan.nextLine();
+			
+		Detalhes detalhe = em.find(Detalhes.class, id);
+		
+		if (detalhe != null) {
+			System.out.println("Id não encontrado");
+		} else {
+			em.getTransaction().begin();
+			em.remove(detalhe);
+			em.getTransaction().commit();
+			
+			System.out.println("Detalhes da conta excluída com sucesso!!!");
+		}
+			
+	}
+	
+	public void updateDetalhes() {
+		System.out.print("Digite o ID dos detalhes da conta para ser atualizada: ");
+			int id = scan.nextInt(); scan.nextLine();
+			
+		Detalhes detalhe = em.find(Detalhes.class, id);
+		
+		if (detalhe != null) {
+			createDetalhes();
+			
+		} else {
+			System.out.println("Id não encontrado!!!");
+			
+		}
+		System.out.println("Detalhes da conta atualizada com sucesso!!!");
+			
+	}
+	
+	public void findByIdDetalhes() {
+		System.out.print("Digite o id do detalhe da conta: ");
+		int id = scan.nextInt();   scan.nextLine();
+		
+		Detalhes detalhe = em.find(Detalhes.class, id);
+		if (detalhe == null) {
+			System.out.println("Detalhes da conta: " + id + " Id, não encontrado!!!");
+			
+		} else {
+			System.out.println(detalhe);
+		}
+	}
+
+}

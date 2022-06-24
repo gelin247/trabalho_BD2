@@ -1,0 +1,13 @@
+package main;
+
+import dao.ControllerProjetos;
+import dao.ControllerDetalhes;
+import dao.ControllerMovimentos;
+
+public class StartApp {
+
+	public static void main(String[] args) {
+		
+		
+
+}
